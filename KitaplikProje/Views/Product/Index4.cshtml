@@ -1,0 +1,42 @@
+﻿@model List<KitaplikProje.Models.Product>
+@{
+    ViewData["Title"] = "Index4";
+    Layout = "~/Views/Shared/__Layout.cshtml";
+}
+
+<h1>Kitap Listesi</h1>
+<br/>
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kitap Adı</th>
+        <th>Kategori Adı</th>
+        <th>Kitap Yazarı</th>
+        <th>Kitap Yayınevi</th>
+        <th>Kitap YayınYılı</th>
+        <th>ImageURL</th>
+        <th>Kitap Özeti</th>
+        <th>Stok</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Details</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.BookID</td>
+            <td>@item.BookName</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.BookWrites</td>
+            <td>@item.BookPublishHouse</td>
+            <td>@item.BookPublishYear</td>
+            <td>@item.BookImageURL</td>
+            <td>@item.BookSummary</td>
+            <td>@item.BookStock</td>
+            <td><a href="/Product/ProductDelete/@item.BookID" class="btn btn-danger">Delete</a></td> 
+            <td><a href="/Product/ProductGet/@item.BookID" class="btn btn-success">Update</a></td>
+            <td><a href="#" class="btn btn-info">Detail</a></td>         
+        </tr>
+    }
+</table>
+<a href="/Product/ProductAdd/"class="btn btn-primary">Yeni Eser</a>

@@ -1,0 +1,37 @@
+﻿@model KitaplikProje.Models.Product
+@{
+    ViewData["Title"] = "ProductAdd";
+    Layout = "~/Views/Shared/__Layout.cshtml";
+}
+
+<h1>Kitap Ekleme</h1>
+<br />
+@using (Html.BeginForm("ProductAdd", "Product", FormMethod.Post))
+{
+    @Html.Label("Kitap Adı")
+    @Html.TextBoxFor(x=>x.BookName,new{@class="form-control"})
+    <br />
+    @Html.Label("Kategori")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.v1,new{@class="form-control"})
+    <br />
+    @Html.Label("Yazar")
+    @Html.TextBoxFor(x=>x.BookWrites,new{@class="form-control"})
+    <br />
+    @Html.Label("Yayınevi")
+    @Html.TextBoxFor(x=>x.BookPublishHouse,new{@class="form-control"})
+    <br />
+    @Html.Label("Yayın Yılı")
+    @Html.TextBoxFor(x=>x.BookPublishYear,new{@class="form-control"})
+    <br />
+    @Html.Label("ImageURL")
+    @Html.TextBoxFor(x=>x.BookImageURL,new{@class="form-control"})
+    <br />
+    @Html.Label("Kitap Özeti")
+    @Html.TextBoxFor(x=>x.BookSummary,new{@class="form-control"})
+    <br />
+    @Html.Label("Stok")
+    @Html.TextBoxFor(x=>x.BookStock,new{@class="form-control"})
+    <br />
+    <button class="btn btn-primary">Save</button>
+}
+
