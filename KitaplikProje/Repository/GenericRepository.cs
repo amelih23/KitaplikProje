@@ -1,5 +1,6 @@
 ﻿using KitaplikProje.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace KitaplikProje.Repository
 {
@@ -32,6 +33,10 @@ namespace KitaplikProje.Repository
         public List<T> TList(string p)
         {
             return c.Set<T>().Include(p).ToList();// product viewde kategori ismini getirdik
+        }
+        public List<T>List(Expression<Func<T, bool>> Filter) 
+        {
+            return c.Set<T>().Where(Filter).ToList();
         }
     }
 }

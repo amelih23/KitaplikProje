@@ -3,6 +3,7 @@ using KitaplikProje.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net;
+using X.PagedList;
 
 namespace KitaplikProje.Controllers
 {
@@ -10,11 +11,11 @@ namespace KitaplikProje.Controllers
     {
         ProductRepository productRepository = new ProductRepository();
         Context c = new Context();
-        public IActionResult Index4()
+        public IActionResult Index4(int page=1)
         {
-            return View(productRepository.TList("Category"));//product vieew kategori adı getirmek için döndürdük
+            return View(productRepository.TList("Category").ToPagedList(page,4));//product vieew kategori adı getirmek için döndürdük
         }
-        [HttpGet]//sayfa yüklendiği zaman çalışır
+        [HttpGet]//sayfa yüklendiği zaman çalışır 
         public IActionResult ProductAdd()
         {//burda bi tane nesne listesi oluşturacaz daha sonra oluşturmuş olduğumuz bu nesneyi bir viewbag yardımıyla dropdown a view tarafı için gönderecz ordanda verileri istelemeyi yapacaz
             List<SelectListItem> values = (from x in c.Categories.ToList()//amaç kategori adını çekebilmek ekleme işleminde
@@ -78,5 +79,6 @@ namespace KitaplikProje.Controllers
             productRepository.TUpdate(x);
             return RedirectToAction("Index4");
         }
+        
     }
 }

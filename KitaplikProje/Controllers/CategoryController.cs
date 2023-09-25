@@ -7,8 +7,13 @@ namespace KitaplikProje.Controllers
     public class CategoryController : Controller
     {
         CategoryRepository categoryRepository = new CategoryRepository();
-        public IActionResult Index3()
-        {           
+        public IActionResult Index3(string p)
+        {
+            if (!string.IsNullOrEmpty(p))
+            {
+                return View(categoryRepository.List(x => x.CategoryName == p));
+            }
+            
             return View(categoryRepository.TList());
         }
         [HttpGet]
@@ -19,10 +24,10 @@ namespace KitaplikProje.Controllers
         [HttpPost]
         public IActionResult CategoryAdd(Category p) 
         {
-            //if(!ModelState.IsValid)//eğer farklıysa...
-            //{
-            //    return View("CategoryAdd");
-            //}
+            if (!ModelState.IsValid)//eğer farklıysa...
+            {
+                return View("CategoryAdd");
+            }
             categoryRepository.TAdd(p);
             return RedirectToAction("Index3");
         }

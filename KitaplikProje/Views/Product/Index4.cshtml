@@ -1,4 +1,7 @@
-﻿@model List<KitaplikProje.Models.Product>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model IPagedList<KitaplikProje.Models.Product>
 @{
     ViewData["Title"] = "Index4";
     Layout = "~/Views/Shared/__Layout.cshtml";
@@ -19,7 +22,7 @@
         <th>Stok</th>
         <th>Delete</th>
         <th>Update</th>
-        <th>Details</th>
+       
     </tr>
     @foreach(var item in Model)
     {
@@ -35,8 +38,9 @@
             <td>@item.BookStock</td>
             <td><a href="/Product/ProductDelete/@item.BookID" class="btn btn-danger">Delete</a></td> 
             <td><a href="/Product/ProductGet/@item.BookID" class="btn btn-success">Update</a></td>
-            <td><a href="#" class="btn btn-info">Detail</a></td>         
+                   
         </tr>
     }
 </table>
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index4",new{page}))
 <a href="/Product/ProductAdd/"class="btn btn-primary">Yeni Eser</a>
